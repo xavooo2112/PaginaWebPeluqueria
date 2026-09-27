@@ -138,13 +138,21 @@
             <h1>Barbería Miguel Angel</h1>
             <span>Grao de Castelló</span>
         </div>
-        <nav>
+        <button class="hamburger" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mobileNav">
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="servicios.html">Servicios</a></li>
                 <li><a href="resenas.html" class="active">Reseñas</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
+            <a href="tel:666204788" class="nav-phone-mobile">
+                <i class="fas fa-phone-alt"></i> 666 20 47 88
+            </a>
         </nav>
         <a href="tel:666204788" class="btn-primary phone-btn">
             <i class="fas fa-phone-alt"></i> 666 20 47 88
@@ -235,6 +243,34 @@
             <p>&copy; 2026 Barbería Miguel Angel. Todos los derechos reservados.</p>
         </div>
     </footer>
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mobileNav');
+
+        toggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('open');
+            toggle.classList.toggle('open', isOpen);
+            toggle.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        nav.addEventListener('click', (e) => {
+            if (e.target === nav) {
+                nav.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                toggle.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
 </body>
 
 </html>
